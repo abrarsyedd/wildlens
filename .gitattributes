@@ -1,0 +1,13 @@
+This file tells GitHub's language scanner (Linguist) what to do.
+
+Treat the massive index.html file as "documentation" (markup),
+
+not as the primary code of the project. This will remove it
+
+from the language statistics bar.
+
+frontend/index.html linguist-documentation
+
+Also treat the SQL schema file as documentation.
+
+backend/database.sql linguist-documentation
