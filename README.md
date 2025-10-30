@@ -1,15 +1,12 @@
+# 🚀 <img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/d7a72968-4756-4b68-aea0-3477e35da5a4" />
+
+
 # 🦁 WildLens — A Serverless, Full-Stack Image Gallery
 
 **WildLens** is a dynamic, cloud-native web application serving as a portfolio for wildlife photography.  
 It features a **scalable, event-driven architecture** that automatically processes, resizes, and optimizes uploaded images in real-time using AWS services.
 
 > 🧩 Built with **AWS Lambda**, **S3**, **RDS**, **EC2**, and **Node.js**, this project demonstrates a modern full-stack, serverless workflow for user-generated content.
-
----
-
-## 🚀 Live Demo
-
-👉 **[View Live (Requires EC2 Server Running)](http://YOUR_EC2_PUBLIC_IP:3000)**
 
 ---
 
