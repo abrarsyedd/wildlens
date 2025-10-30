@@ -4,14 +4,20 @@ import multer from 'multer';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import crypto from 'crypto';
 import cors from 'cors';
-import path from 'path';
-import 'dotenv/config'; // Use this syntax for dotenv with ES modules
+import 'dotenv/config';
+
+// --- NEW IMPORTS for serving static files ---
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+// --- NEWESM setup for __dirname ---
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename); // This is the 'backend' directory
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// --- Database Connection (Now points to RDS) ---
-// The connection details are now read from your .env file
+// --- Database Connection (Points to RDS) ---
 const dbPool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -22,18 +28,15 @@ const dbPool = mysql.createPool({
   queueLimit: 0,
 });
 
-// Test DB connection on startup
+// Test DB connection
 dbPool.getConnection()
   .then(connection => {
     console.log('Connected to AWS RDS database successfully!');
     connection.release();
   })
   .catch(err => {
-    console.error('!!! FAILED TO CONNECT TO RDS DATABASE !!!');
-    console.error(`Error: ${err.message}`);
-    console.error('Check your .env file and RDS Security Group settings.');
+    console.error(`!!! FAILED TO CONNECT TO RDS: ${err.message}`);
   });
-
 
 // --- S3 Client Initialization ---
 const s3 = new S3Client({
@@ -50,19 +53,25 @@ const upload = multer({ storage: storage });
 
 // --- Middleware ---
 app.use(cors({ origin: '*' }));
-app.use(express.json()); 
+app.use(express.json());
+
+// --- NEW: Serve Static Frontend Files ---
+// Get the path to the 'frontend' directory (one level up from 'backend')
+const frontendPath = path.join(__dirname, '..', 'frontend');
+console.log(`Serving static files from: ${frontendPath}`);
+// Serve all files in the 'frontend' folder
+app.use(express.static(frontendPath)); 
 
 // --- API Routes ---
 
 /**
  * GET /api/gallery
- * Fetches ALL images (initial + resized) from the shared RDS database.
+ * Fetches ALL images from the shared RDS database.
  */
 app.get('/api/gallery', async (req, res) => {
   console.log('[API] GET /api/gallery requested');
   try {
     const [rows] = await dbPool.query('SELECT * FROM images ORDER BY id DESC');
-    console.log(`[API] Responding with ${rows.length} images from RDS.`);
     res.json(rows);
   } catch (error) {
     console.error('[API] Error fetching gallery from RDS DB:', error);
@@ -72,10 +81,8 @@ app.get('/api/gallery', async (req, res) => {
 
 /**
  * POST /upload
- * This is the FIRST step.
- * 1. Receives file from frontend.
- * 2. Uploads the ORIGINAL file to the `uploads/` folder in S3.
- * 3. This S3 upload will trigger the Lambda function.
+ * Uploads the ORIGINAL file to the `uploads/` folder in S3.
+ * This S3 upload triggers the Lambda function.
  */
 app.post('/upload', upload.single('imageFile'), async (req, res) => {
   console.log('[API] POST /upload request received');
@@ -84,19 +91,11 @@ app.post('/upload', upload.single('imageFile'), async (req, res) => {
     if (!file) {
       return res.status(400).json({ success: false, message: 'No image file provided.' });
     }
-
-    console.log(`[API] Received file: ${file.originalname}`);
-
-    // Get metadata from form body
     const { title, description, category, location, photographer } = req.body;
-
-    // Prepare S3 Key (in 'uploads/' folder)
     const randomBytes = crypto.randomBytes(16).toString('hex');
     const extension = path.extname(file.originalname);
-    // NEW: Upload to 'uploads/' folder
     const s3Key = `uploads/${Date.now()}-${randomBytes}${extension}`;
 
-    // Prepare metadata for S3 object (will be read by Lambda)
     const s3Metadata = {
       title: title || 'Untitled',
       description: description || '',
@@ -105,7 +104,6 @@ app.post('/upload', upload.single('imageFile'), async (req, res) => {
       photographer: photographer || 'Anonymous',
     };
 
-    // Prepare S3 Upload Command
     const uploadParams = {
       Bucket: process.env.AWS_BUCKET_NAME,
       Key: s3Key,
@@ -117,10 +115,9 @@ app.post('/upload', upload.single('imageFile'), async (req, res) => {
     console.log(`[API] Uploading original to S3: ${uploadParams.Bucket}/${s3Key}`);
     await s3.send(new PutObjectCommand(uploadParams));
 
-    // Respond with success message
     res.json({
       success: true,
-      message: 'File uploaded to S3/uploads/. Processing will be done by Lambda.',
+      message: 'File uploaded. Processing will be done by Lambda.',
     });
   } catch (error) {
     console.error('[API] Error during S3 upload process:', error);
@@ -132,14 +129,20 @@ app.post('/upload', upload.single('imageFile'), async (req, res) => {
   }
 });
 
+// --- NEW: Fallback for SPA (Single Page App) ---
+// This sends 'index.html' for any request that doesn't match an API route
+// or a static file, allowing your hash-based navigation to work.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
+
 // --- Start Server ---
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => { // Listen on all network interfaces
   console.log('\n--- Server Configuration (PRODUCTION / RDS) ---');
   console.log(`Server Port: ${port}`);
   console.log(`Database Host: ${process.env.DB_HOST}`);
-  console.log(`Database Name: ${process.env.DB_NAME}`);
   console.log(`S3 Upload Target: /uploads/ folder (triggers Lambda)`);
-  console.log('------------------------------------------------');
-  console.log(`WildLens backend server running at http://localhost:${port}\n`);
+  console.log(`WildLens server running at http://0.0.0.0:${port}\n`);
 });
+
 

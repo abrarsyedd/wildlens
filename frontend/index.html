@@ -22,29 +22,26 @@
 </head>
 <body class="bg-gray-900 text-gray-200">
 
+    <!-- Header / Nav -->
     <header class="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-700">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <a href="#home" class="flex items-center space-x-2 nav-link">
-                    <!-- SVG Logo -->
-                    <svg class="h-8 w-8 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 17.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11z"></path><path d="M12 2v2.5"></path><path d="M12 19.5V22"></path><path d="M22 12h-2.5"></path><path d="M4.5 12H2"></path><path d="m19.07 4.93-1.77 1.77"></path><path d="m6.7 17.3-1.77 1.77"></path><path d="m19.07 19.07-1.77-1.77"></path><path d="m6.7 6.7-1.77-1.77"></path></svg>
+                    <svg class="h-8 w-8 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 17.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11z"></path><path d="M12 2v2.5"></path><path d="M12 19.5V22"></path><path d="M22 12h-2.5"></path><path d="M4.5 12H2"></path><path d="m19.07 4.93-1.77 1.77"></path><path d="m6.7 17.3-1.77 1.77"></path><path d"m19.07 19.07-1.77-1.77"></path><path d="m6.7 6.7-1.77-1.77"></path></svg>
                     <span class="text-2xl font-bold text-white">WildLens</span>
                 </a>
-                <!-- Desktop Nav -->
                 <div class="hidden sm:flex sm:items-center sm:space-x-6">
                     <a href="#home" class="nav-link text-gray-300 hover:text-blue-400 transition-colors">Home</a>
                     <a href="#gallery" class="nav-link text-gray-300 hover:text-blue-400 transition-colors">Gallery</a>
                     <a href="#about" class="nav-link text-gray-300 hover:text-blue-400 transition-colors">About</a>
                     <a href="#upload" class="nav-link bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors">Upload</a>
                 </div>
-                <!-- Mobile Menu Button -->
                 <div class="sm:hidden">
                     <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                     </button>
                 </div>
             </div>
-            <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden sm:hidden pb-3">
                 <a href="#home" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Home</a>
                 <a href="#gallery" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Gallery</a>
@@ -54,15 +51,12 @@
         </nav>
     </header>
 
+    <!-- Main Content -->
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Home Page -->
         <section id="page-home" class="page active fade-in">
             <div class="relative rounded-lg overflow-hidden h-[60vh] min-h-[400px] flex items-center justify-center text-center shadow-2xl">
-                <!-- Use S3 URL -->
-                <img src="https://wildlens-gallery-images.s3.us-east-1.amazonaws.com/wild40.jpg"
-                     alt="Wildlife Hero Image"
-                     class="absolute inset-0 w-full h-full object-cover z-0"
-                     onerror="this.onerror=null; this.src='https://placehold.co/1740x800/1F2937/FFFFFF?text=Hero+Image+Error'"> <!-- Added onerror -->
+                <img src="https://wildlens-gallery-images.s3.us-east-1.amazonaws.com/wild40.jpg" alt="Wildlife Hero Image" class="absolute inset-0 w-full h-full object-cover z-0" onerror="this.onerror=null; this.src='https://placehold.co/1740x800/1F2937/FFFFFF?text=Hero+Image+Error'">
                 <div class="absolute inset-0 bg-black/60 z-10"></div>
                 <div class="relative z-20 p-8">
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4">Welcome to WildLens</h1>
@@ -73,7 +67,6 @@
             <div class="mt-16">
                 <h2 class="text-3xl font-bold text-center text-white mb-8">Featured Shots</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Use S3 URLs -->
                     <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
                         <img src="https://wildlens-gallery-images.s3.us-east-1.amazonaws.com/wild2.jpg" alt="Feature 1" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/374151/9CA3AF?text=Feature+1+Error'">
                         <div class="p-6"><h3 class="text-xl font-semibold text-white mb-2">Majestic Predator</h3><p class="text-gray-400">A stunning shot of a lion surveying its territory.</p></div>
@@ -104,7 +97,6 @@
              <h1 class="text-4xl font-extrabold text-white mb-8">Upload Your Shot</h1>
              <div class="max-w-3xl mx-auto bg-gray-800 p-8 rounded-lg shadow-2xl">
                  <form id="upload-form" class="space-y-6">
-                     
                      <div id="drag-area" class="drag-area rounded-lg p-10 text-center cursor-pointer transition-all">
                          <input type="file" id="file-input" class="hidden" accept="image/*">
                          <div class="flex flex-col items-center">
@@ -113,7 +105,6 @@
                              <p class="text-sm text-gray-500 mt-1">PNG, JPG, or WEBP (Max 10MB)</p>
                          </div>
                      </div>
-                     
                      <div id="preview-container" class="hidden">
                          <p class="text-sm font-medium text-gray-300 mb-2">Preview:</p>
                          <div class="relative">
@@ -121,7 +112,6 @@
                              <button id="remove-preview" type="button" class="absolute top-2 right-2 bg-red-600/70 hover:bg-red-500 text-white rounded-full p-1.5 focus:outline-none"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
                          </div>
                      </div>
-                     
                      <div>
                          <label for="image-title" class="block text-sm font-medium text-gray-300 mb-1">Image Title</label>
                          <input type="text" id="image-title" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., Lion at Dawn">
@@ -130,7 +120,6 @@
                          <label for="image-description" class="block text-sm font-medium text-gray-300 mb-1">Description</label>
                          <textarea id="image-description" rows="3" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="A brief description of your photo..."></textarea>
                      </div>
-
                      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                          <div>
                              <label for="image-category" class="block text-sm font-medium text-gray-300 mb-1">Category</label>
@@ -145,7 +134,6 @@
                          <label for="image-photographer" class="block text-sm font-medium text-gray-300 mb-1">Photographer</label>
                          <input type="text" id="image-photographer" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Name">
                      </div>
-
                      <div class="text-right">
                          <button type="submit" id="upload-button" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md text-lg font-semibold transition-colors disabled:opacity-50" disabled>Upload to Gallery</button>
                      </div>
@@ -159,10 +147,8 @@
             <h1 class="text-4xl font-extrabold text-white mb-8">Our Vision</h1>
             <div class="max-w-3xl mx-auto bg-gray-800 p-8 rounded-lg shadow-2xl space-y-6 text-gray-300 leading-relaxed">
                 <p><strong>WildLens</strong> is more than just a gallery; it's a celebration of the planet's most incredible inhabitants and the wild places they call home. Our mission is to build a vibrant community of photographers, explorers, and nature lovers dedicated to capturing the raw beauty of the natural world.</p>
-                
                 <h2 class="text-2xl font-bold text-white pt-4">The Art of Patience</h2>
                 <p>Wildlife photography is an art form built on a foundation of patience and respect. It's about spending hours, sometimes days, waiting for that perfect, fleeting moment. It's about understanding an animal's behavior, respecting its space, and moving through its environment with minimal impact. The greatest shots are not just technically brilliant; they are intimate portraits that reveal the subject's true spirit, captured by a photographer who was patient enough to be accepted into its world.</p>
-
                 <h2 class="text-2xl font-bold text-white pt-4">Ethics and Conservation</h2>
                 <p>With the power of a lens comes a profound responsibility. At WildLens, we champion ethical photography practices above all else. This means:</p>
                 <ul class="list-disc list-inside space-y-2 pl-4">
@@ -171,13 +157,13 @@
                     <li><strong class="text-blue-300">Honest representation.</strong> We value authentic images that depict natural behaviors without digital manipulation that alters the truth of the moment.</li>
                 </ul>
                 <p>Through these shared images, we hope to do more than just showcase beautiful art. We aim to inspire a deeper connection to our planet and foster a powerful new generation of conservationists. When people see the beauty, intelligence, and vulnerability of these animals, they are moved to protect them. That is the ultimate purpose of WildLens.</p>
-                
                 <h2 class="text-2xl font-bold text-white pt-4">Join Our Community</h2>
                 <p>Whether you're a seasoned professional with a telephoto lens that rivals a telescope, or a hobbyist capturing backyard wonders with your phone, your perspective is valuable. Upload your shot, share the story behind the image, and join our mission to document and protect the wild.</p>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="bg-gray-800 mt-16 border-t border-gray-700">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-gray-500">
             <p>&copy; 2025 WildLens. All rights reserved.</p>
@@ -190,9 +176,9 @@
         <img id="lightbox-img" src="" alt="Full size view" class="max-w-full max-h-full rounded-lg shadow-2xl">
     </div>
 
+    <!-- SCRIPT (WITH CRITICAL API URL CHANGES) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Elements ---
             const pages = document.querySelectorAll('.page');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -230,9 +216,7 @@
                     const hash = e.currentTarget.hash;
                     if (hash) {
                         mobileMenu.classList.add('hidden'); 
-                        if (location.hash === hash) {
-                            handleHashChange();
-                        }
+                        if (location.hash === hash) { handleHashChange(); }
                     }
                 });
             });
@@ -283,7 +267,11 @@
                 if (!galleryGrid) return;
                 galleryGrid.innerHTML = '<p class="text-blue-400 col-span-full text-center">Loading gallery...</p>';
                 const cacheBuster = `t=${Date.now()}`;
-                const apiUrl = `http://localhost:3000/api/gallery?${cacheBuster}`;
+                
+                // --- THIS IS THE CRITICAL CHANGE ---
+                // It fetches from the same server that served the page.
+                const apiUrl = `/api/gallery?${cacheBuster}`; 
+                
                 fetch(apiUrl)
                     .then(response => {
                         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -297,12 +285,8 @@
                         galleryGrid.innerHTML = `<p class="text-red-400 col-span-full text-center">Could not load gallery. Check console.</p>`;
                     });
             }
-            if (lightboxClose) {
-                lightboxClose.addEventListener('click', () => lightbox.classList.add('hidden'));
-            }
-            if (lightbox) {
-                lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.add('hidden'); });
-            }
+            if (lightboxClose) { lightboxClose.addEventListener('click', () => lightbox.classList.add('hidden')); }
+            if (lightbox) { lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.add('hidden'); }); }
 
             // --- Upload Page Logic ---
             function handleFile(file) {
@@ -311,7 +295,6 @@
                  dragArea.classList.remove('hidden');
                  uploadButton.disabled = true;
                  uploadStatus.textContent = '';
-
                  if (file && file.type && file.type.startsWith('image/')) {
                      currentFile = file;
                      const reader = new FileReader();
@@ -365,18 +348,17 @@
                  formData.append('location', document.getElementById('image-location').value);
                  formData.append('photographer', document.getElementById('image-photographer').value);
 
-                 fetch('http://localhost:3000/upload', { method: 'POST', body: formData })
+                 // --- THIS IS THE CRITICAL CHANGE ---
+                 fetch('/upload', { method: 'POST', body: formData })
                      .then(response => {
                          if (!response.ok) { return response.text().then(text => {throw new Error(text || `HTTP error ${response.status}`)}); }
                          return response.json();
                      })
                      .then(data => {
                          if(data.success) {
-                             // *** MODIFIED SUCCESS MESSAGE ***
                              uploadStatus.innerHTML = `<span class="text-green-400">Success! Upload received. Your image is being processed and will appear in the gallery shortly.</span>`;
-                             removePreview.click(); // Clear the preview
-                             uploadForm.reset(); // Clear the form fields
-                             // Redirect to gallery after a delay
+                             removePreview.click();
+                             uploadForm.reset();
                              setTimeout(() => { window.location.hash = 'gallery'; }, 2500);
                          } else {
                              uploadStatus.innerHTML = `<span class="text-red-400">Error: ${data.message || 'Upload failed.'}</span>`;
@@ -401,3 +383,5 @@
     </script>
 </body>
 </html>
+
+
