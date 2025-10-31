@@ -1,8 +1,9 @@
 # 🚀 Architecture
 
-<p align="center">
+<div align="center">
   <img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/d7a72968-4756-4b68-aea0-3477e35da5a4" />
-</p>
+</div>
+
 
 
 # 🦁 WildLens — A Serverless, Full-Stack Image Gallery
